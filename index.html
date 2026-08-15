@@ -5,28 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #eef8ff;
-      -webkit-tap-highlight-color: transparent;
-    }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #eef8ff; -webkit-tap-highlight-color: transparent; }
     .card { background: #fff; border: 1px solid #dbeafe; border-radius: 18px; }
     .rodBtn, .catchBtn { min-height: 46px; touch-action: manipulation; }
     .rodBtn.active { background: #075985; color: #fff; border-color: #075985; }
-    .numberBox {
-      width: 82px; min-height: 42px; padding: 5px 7px; text-align: center;
-      font-size: 16px; font-weight: 700; color: #075985; outline: none;
-      border: 1px solid #cbd5e1; border-radius: 8px;
-    }
+    .numberBox { width: 82px; min-height: 42px; padding: 5px 7px; text-align: center; font-size: 16px; font-weight: 700; color: #075985; outline: none; border: 1px solid #cbd5e1; border-radius: 8px; }
     .numberBox:focus { border-color: #0284c7; box-shadow: 0 0 0 2px #e0f2fe; }
     input[type="range"] { min-height: 32px; touch-action: pan-x; }
     .drop { stroke-dasharray: 360; stroke-dashoffset: 360; animation: drop .7s ease-out forwards; }
     @keyframes drop { to { stroke-dashoffset: 0; } }
     svg { touch-action: manipulation; }
-    @media (max-width: 420px) {
-      .numberBox { width: 76px; }
-      h1 { font-size: 1.65rem !important; }
-    }
+    @media (max-width: 420px) { .numberBox { width: 76px; } h1 { font-size: 1.65rem !important; } }
   </style>
 </head>
 <body class="min-h-screen text-slate-800">
@@ -35,16 +24,12 @@
       <h1 class="text-2xl sm:text-3xl font-bold text-slate-900">🎣 Explore the cosine ratio with fishing</h1>
       <p class="text-slate-600 mt-1">Change the casting angle and rod length to catch the fish!</p>
     </header>
-
     <div class="grid lg:grid-cols-[1.55fr_.8fr] gap-4 sm:gap-5">
       <section class="card p-3 sm:p-5">
         <div class="flex flex-wrap justify-between gap-2 items-center mb-3">
           <b>Fishing scene</b>
-          <div id="catchMsg" class="text-sm font-medium text-amber-700" aria-live="polite">
-            Adjust the rod or angle to reach the fish.
-          </div>
+          <div id="catchMsg" class="text-sm font-medium text-amber-700" aria-live="polite">Adjust the rod or angle to reach the fish.</div>
         </div>
-
         <svg viewBox="0 0 720 460" class="w-full h-auto rounded-xl bg-sky-100 border border-sky-200" role="img" aria-label="Fisherman with fishing rod, horizontal reach, right-angled triangle and fish">
           <rect width="720" height="460" fill="#dff4ff" />
           <circle cx="635" cy="62" r="35" fill="#fde68a" />
@@ -52,7 +37,7 @@
           <rect y="385" width="720" height="75" fill="#38bdf8" />
           <path d="M0 402H720M0 430H720" stroke="#e0f2fe" stroke-width="3" />
           <path d="M0 385H720" stroke="#166534" stroke-width="4" />
-          <g aria-label="fisherman">
+          <g aria-label="150 centimetre fisherman" transform="translate(80 190) scale(.5)">
             <circle cx="105" cy="245" r="25" fill="#334155" />
             <path d="M105 273L105 344M105 300L69 330M105 344L72 385M105 344L141 385" stroke="#334155" stroke-width="12" stroke-linecap="round" />
             <path d="M69 385H88M136 385H156" stroke="#1e293b" stroke-width="9" stroke-linecap="round" />
@@ -61,64 +46,45 @@
           </g>
           <g id="dynamic"></g>
         </svg>
-
         <div class="grid sm:grid-cols-3 gap-3 mt-4 text-center">
           <div class="rounded-xl bg-sky-50 p-3"><div class="text-xs uppercase tracking-wide text-slate-500">Hypotenuse</div><div id="hypVal" class="font-bold text-xl text-sky-800"></div><div class="text-xs text-slate-500">fishing rod</div></div>
           <div class="rounded-xl bg-violet-50 p-3"><div class="text-xs uppercase tracking-wide text-slate-500">Adjacent</div><div id="adjVal" class="font-bold text-xl text-violet-700"></div><div class="text-xs text-slate-500">horizontal reach</div></div>
           <div class="rounded-xl bg-emerald-50 p-3"><div class="text-xs uppercase tracking-wide text-slate-500">Cosine ratio</div><div id="ratioVal" class="font-bold text-xl text-emerald-700"></div><div class="text-xs text-slate-500">adjacent ÷ hypotenuse</div></div>
         </div>
       </section>
-
       <aside class="space-y-4">
         <section class="card p-4 sm:p-5">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <label class="font-bold text-lg" for="fishRange">1. Move the fish</label>
-            <label class="text-sm text-slate-600 flex items-center gap-1">Position
-              <input id="fishInput" class="numberBox" type="number" inputmode="decimal" min="50" max="400" step="0.1" value="300.0" aria-label="Fish position in centimetres" />
-              <span class="text-slate-500">cm</span>
-            </label>
-          </div>
-          <input id="fishRange" type="range" min="50" max="400" value="300" step="0.1" class="w-full mt-3 accent-rose-500" aria-label="Move fish position" />
+          <div class="flex flex-wrap items-center justify-between gap-2"><label class="font-bold text-lg" for="fishRange">1. Move the fish</label><label class="text-sm text-slate-600 flex items-center gap-1">Position <input id="fishInput" class="numberBox" type="number" inputmode="decimal" min="50" max="400" step="0.1" value="300.0" /><span class="text-slate-500">cm</span></label></div>
+          <input id="fishRange" type="range" min="50" max="400" value="300" step="0.1" class="w-full mt-3 accent-rose-500" />
           <div class="flex justify-between gap-2 text-sm"><span class="text-slate-500">50 cm</span><b id="fishVal" class="text-rose-700 text-center">Fish position: 300.0 cm</b><span class="text-slate-500">400 cm</span></div>
         </section>
-
+        <section class="card p-4 sm:p-5"><h2 class="font-bold text-lg">2. Choose a fishing rod</h2><div id="rods" class="grid grid-cols-2 gap-2 mt-3"></div></section>
         <section class="card p-4 sm:p-5">
-          <h2 class="font-bold text-lg">2. Choose a fishing rod</h2>
-          <div id="rods" class="grid grid-cols-2 gap-2 mt-3"></div>
-        </section>
-
-        <section class="card p-4 sm:p-5">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <label class="font-bold text-lg" for="angleRange">3. Adjust the casting angle</label>
-            <label class="text-sm text-slate-600 flex items-center gap-1">Angle
-              <input id="angleInput" class="numberBox" type="number" inputmode="decimal" min="15" max="75" step="0.1" value="30.0" aria-label="Casting angle in degrees" />
-              <span class="text-slate-500">°</span>
-            </label>
-          </div>
-          <input id="angleRange" type="range" min="15" max="75" value="30" step="0.1" class="w-full mt-3 accent-sky-700" aria-label="Adjust casting angle" />
+          <div class="flex flex-wrap items-center justify-between gap-2"><label class="font-bold text-lg" for="angleRange">3. Adjust the casting angle</label><label class="text-sm text-slate-600 flex items-center gap-1">Angle <input id="angleInput" class="numberBox" type="number" inputmode="decimal" min="15" max="75" step="0.1" value="30.0" /><span class="text-slate-500">°</span></label></div>
+          <input id="angleRange" type="range" min="15" max="75" value="30" step="0.1" class="w-full mt-3 accent-sky-700" />
           <div class="flex justify-between items-center"><span class="text-sm text-slate-500">15°</span><b id="angleVal" class="text-2xl text-sky-800">30.0°</b><span class="text-sm text-slate-500">75°</span></div>
         </section>
-
         <button id="catchBtn" type="button" class="catchBtn w-full rounded-xl bg-emerald-600 px-4 py-3 text-lg font-bold text-white shadow-sm active:bg-emerald-800 hover:bg-emerald-700">Catch!</button>
       </aside>
     </div>
   </main>
-
   <script>
     let angle = 30;
-    let rod = 300;
+    let rod = 240;
     let fish = 300;
     let phase = 'ready';
     let sceneMsg = '';
     let caught = false;
     let tryAgain = false;
+    let liftProgress = 0;
 
     const lengths = [180, 240, 300, 420];
-    const D = document.getElementById('dynamic');
+    const dynamic = document.getElementById('dynamic');
+    const rods = document.getElementById('rods');
     const scale = 0.8;
     const baseX = 175;
     const baseY = 385;
-    const fmt = n => Number(n).toFixed(1);
+    const fmt = value => Number(value).toFixed(1);
     const fishRange = document.getElementById('fishRange');
     const angleRange = document.getElementById('angleRange');
     const fishInput = document.getElementById('fishInput');
@@ -135,18 +101,20 @@
       const midY = (baseY + tipY) / 2;
       const labelW = 250;
       const reachX = Math.min(Math.max(baseX + labelW / 2 + 5, midX), 715 - labelW / 2);
+      const lifting = phase === 'lifting' || phase === 'caught';
+      const lineEndY = lifting ? (baseY - 9) + (tipY + 25 - (baseY - 9)) * liftProgress : baseY - 9;
+      const showLine = phase !== 'ready';
+      const showFish = phase !== 'gone';
+      const fishY = lifting ? lineEndY + 9 : baseY;
+      const fishLabel = phase === 'ready' || phase === 'dropping' || phase === 'landed';
 
-      const line = phase !== 'ready' ? `
-        <path class="${phase === 'dropping' ? 'drop' : ''}" d="M${tipX.toFixed(1)} ${tipY.toFixed(1)}L${tipX.toFixed(1)} ${baseY - 9}" stroke="#0f172a" stroke-width="5" stroke-linecap="round" />
-        <path d="M${tipX.toFixed(1)} ${baseY - 9}q-10 5-5 14q5 8 11 1" fill="none" stroke="#0f172a" stroke-width="4" stroke-linecap="round" />
+      const line = showLine ? `
+        <path class="${phase === 'dropping' ? 'drop' : ''}" d="M${tipX.toFixed(1)} ${tipY.toFixed(1)}L${tipX.toFixed(1)} ${lineEndY.toFixed(1)}" stroke="#0f172a" stroke-width="5" stroke-linecap="round" />
+        <path d="M${tipX.toFixed(1)} ${lineEndY.toFixed(1)}q-10 5-5 14q5 8 11 1" fill="none" stroke="#0f172a" stroke-width="4" stroke-linecap="round" />
       ` : '';
+      const msg = sceneMsg ? `<rect x="365" y="98" width="200" height="34" rx="10" fill="white" opacity=".93" /><text x="465" y="121" text-anchor="middle" fill="${caught ? '#047857' : '#b45309'}" font-size="19" font-weight="bold">${sceneMsg}</text>` : '';
 
-      const sceneMessage = sceneMsg ? `
-        <rect x="365" y="98" width="200" height="34" rx="10" fill="white" opacity=".93" />
-        <text x="465" y="121" text-anchor="middle" fill="${caught ? '#047857' : '#b45309'}" font-size="19" font-weight="bold">${sceneMsg}</text>
-      ` : '';
-
-      D.innerHTML = `
+      dynamic.innerHTML = `
         <path d="M${baseX} ${baseY}L${tipX.toFixed(1)} ${baseY}L${tipX.toFixed(1)} ${tipY.toFixed(1)}Z" fill="#ede9fe" opacity=".78" stroke="#8b5cf6" stroke-width="2.5" />
         <path d="M${baseX} ${baseY}L${tipX.toFixed(1)} ${tipY.toFixed(1)}" stroke="#78350f" stroke-width="10" stroke-linecap="round" />
         <path d="M${(tipX - 20).toFixed(1)} ${baseY}V${(baseY - 20).toFixed(1)}H${tipX.toFixed(1)}" fill="none" stroke="#334155" stroke-width="3" />
@@ -157,86 +125,64 @@
         <rect x="${(reachX - labelW / 2).toFixed(1)}" y="${baseY + 12}" width="${labelW}" height="24" rx="6" fill="white" opacity=".92" />
         <text x="${reachX.toFixed(1)}" y="${baseY + 29}" text-anchor="middle" fill="#6d28d9" font-size="16" font-weight="bold">horizontal reach: ${fmt(adjacent)} cm</text>
         ${line}
-        <g id="fishMove" transform="translate(${fishX.toFixed(1)} ${baseY})">
-          <g id="fishGraphic">
-            <ellipse cx="0" cy="6" rx="10" ry="5.5" fill="#f43f5e" />
-            <path d="M9 6L18 0L18 12Z" fill="#e11d48" />
-            <circle cx="-4" cy="5" r="1.5" fill="white" />
-            <circle cx="-4" cy="5" r=".7" fill="#1e293b" />
-          </g>
-          <text id="fishLabel" x="-33" y="-14" fill="#334155" font-size="14" font-weight="600">Fish: ${fmt(fish)} cm</text>
-        </g>
-        ${sceneMessage}
+        ${showFish ? `<g id="fishMove" transform="translate(${fishX.toFixed(1)} ${fishY.toFixed(1)})"><g id="fishGraphic"><ellipse cx="0" cy="6" rx="15" ry="8.25" fill="#f43f5e" /><path d="M13.5 6L27 -3L27 15Z" fill="#e11d48" /><circle cx="-6" cy="5" r="2.25" fill="white" /><circle cx="-6" cy="5" r="1.05" fill="#1e293b" /></g>${fishLabel ? `<text id="fishLabel" x="-37" y="-18" fill="#334155" font-size="14" font-weight="600">Fish: ${fmt(fish)} cm</text>` : ''}</g>` : ''}
+        ${msg}
       `;
 
-      document.getElementById('hypVal').textContent = rod + ' cm';
-      document.getElementById('adjVal').textContent = fmt(adjacent) + ' cm';
-      document.getElementById('ratioVal').textContent = Math.cos(radians).toFixed(3);
-      document.getElementById('angleVal').textContent = fmt(angle) + '°';
-      document.getElementById('fishVal').textContent = 'Fish position: ' + fmt(fish) + ' cm';
+      hypVal.textContent = rod + ' cm';
+      adjVal.textContent = fmt(adjacent) + ' cm';
+      ratioVal.textContent = Math.cos(radians).toFixed(3);
+      angleVal.textContent = fmt(angle) + '°';
+      fishVal.textContent = 'Fish position: ' + fmt(fish) + ' cm';
       fishInput.value = fmt(fish);
       angleInput.value = fmt(angle);
     }
 
     function message(text, good) {
-      const el = document.getElementById('catchMsg');
-      el.textContent = text;
-      el.className = 'text-sm font-medium ' + (good ? 'text-emerald-700' : 'text-amber-700');
+      catchMsg.textContent = text;
+      catchMsg.className = 'text-sm font-medium ' + (good ? 'text-emerald-700' : 'text-amber-700');
     }
 
     function reset() {
-      phase = 'ready'; sceneMsg = ''; caught = false; tryAgain = false;
-      catchBtn.disabled = false;
-      catchBtn.textContent = 'Catch!';
-      catchBtn.classList.remove('opacity-60');
+      phase = 'ready'; sceneMsg = ''; caught = false; tryAgain = false; liftProgress = 0;
+      catchBtn.disabled = false; catchBtn.textContent = 'Catch!'; catchBtn.classList.remove('opacity-60');
       message('Adjust the rod or angle to reach the fish.', false);
     }
 
     function restart() {
-      angle = 30; rod = 300; fish = 300;
-      fishRange.value = 300;
-      angleRange.value = 30;
-      reset();
-      renderRodButtons();
-      draw();
+      angle = 30; rod = 240; fish = 300;
+      fishRange.value = 300; angleRange.value = 30;
+      reset(); renderRodButtons(); draw();
     }
 
     function renderRodButtons() {
-      document.getElementById('rods').innerHTML = lengths.map(length => `
-        <button type="button" data-r="${length}" class="rodBtn border rounded-lg py-2 px-1 font-semibold ${length === rod ? 'active' : 'hover:bg-sky-50'}" aria-pressed="${length === rod}">🎣 ${length} cm</button>
-      `).join('');
-
-      document.querySelectorAll('.rodBtn').forEach(button => {
-        button.onclick = () => {
-          rod = Number(button.dataset.r);
-          reset();
-          renderRodButtons();
-          draw();
-        };
-      });
+      rods.innerHTML = lengths.map(length => `<button type="button" data-r="${length}" class="rodBtn border rounded-lg py-2 px-1 font-semibold ${length === rod ? 'active' : 'hover:bg-sky-50'}">🎣 ${length} cm</button>`).join('');
+      document.querySelectorAll('.rodBtn').forEach(button => button.onclick = () => { rod = Number(button.dataset.r); reset(); renderRodButtons(); draw(); });
     }
 
     function setFish(value) {
       if (!Number.isFinite(value)) return;
-      fish = Math.min(400, Math.max(50, value));
-      fishRange.value = fish;
-      reset();
-      draw();
+      fish = Math.min(400, Math.max(50, value)); fishRange.value = fish; reset(); draw();
     }
 
     function setAngle(value) {
       if (!Number.isFinite(value)) return;
-      angle = Math.min(75, Math.max(15, value));
-      angleRange.value = angle;
-      reset();
-      draw();
+      angle = Math.min(75, Math.max(15, value)); angleRange.value = angle; reset(); draw();
     }
 
     function setTryAgain() {
-      tryAgain = true;
-      catchBtn.disabled = false;
-      catchBtn.classList.remove('opacity-60');
-      catchBtn.textContent = 'Try again!';
+      tryAgain = true; catchBtn.disabled = false; catchBtn.classList.remove('opacity-60'); catchBtn.textContent = 'Try again!';
+    }
+
+    function liftFish() {
+      const start = performance.now();
+      function step(now) {
+        liftProgress = Math.min(1, (now - start) / 1050);
+        draw();
+        if (liftProgress < 1) requestAnimationFrame(step);
+        else { phase = 'caught'; draw(); setTryAgain(); }
+      }
+      requestAnimationFrame(step);
     }
 
     function swimAway() {
@@ -245,59 +191,37 @@
       const label = document.getElementById('fishLabel');
       if (!mover || !graphic) return;
       if (label) label.setAttribute('display', 'none');
-
       const startX = baseX + fish * scale;
       const start = performance.now();
-      const turnDuration = 360;
-      const duration = 1550;
-
+      const turnFraction = 360 / 1550;
       function step(now) {
-        const t = Math.min(1, (now - start) / duration);
-        let x = startX;
-        let fishScale = 1;
-
-        if (t < turnDuration / duration) {
-          fishScale = 1 - 2 * (t / (turnDuration / duration));
-        } else {
-          fishScale = -1;
-          x = startX + (770 - startX) * ((t - turnDuration / duration) / (1 - turnDuration / duration));
-        }
-
+        const t = Math.min(1, (now - start) / 1550);
+        const fishScale = t < turnFraction ? 1 - 2 * t / turnFraction : -1;
+        const x = t < turnFraction ? startX : startX + (770 - startX) * (t - turnFraction) / (1 - turnFraction);
         mover.setAttribute('transform', `translate(${x.toFixed(1)} ${baseY})`);
         graphic.setAttribute('transform', `scale(${fishScale.toFixed(2)} 1)`);
-
-        if (t < 1) requestAnimationFrame(step);
-        else setTryAgain();
+        if (t < 1) requestAnimationFrame(step); else setTryAgain();
       }
       requestAnimationFrame(step);
     }
 
-    fishRange.oninput = e => setFish(Number(e.target.value));
-    angleRange.oninput = e => setAngle(Number(e.target.value));
-    fishInput.onchange = e => setFish(Number(e.target.value));
-    angleInput.onchange = e => setAngle(Number(e.target.value));
-    fishInput.onkeydown = e => { if (e.key === 'Enter') e.target.blur(); };
-    angleInput.onkeydown = e => { if (e.key === 'Enter') e.target.blur(); };
+    fishRange.oninput = event => setFish(Number(event.target.value));
+    angleRange.oninput = event => setAngle(Number(event.target.value));
+    fishInput.onchange = event => setFish(Number(event.target.value));
+    angleInput.onchange = event => setAngle(Number(event.target.value));
+    fishInput.onkeydown = event => { if (event.key === 'Enter') event.target.blur(); };
+    angleInput.onkeydown = event => { if (event.key === 'Enter') event.target.blur(); };
 
     catchBtn.onclick = () => {
       if (tryAgain) { restart(); return; }
-      if (phase === 'dropping') return;
-
-      phase = 'dropping';
-      catchBtn.disabled = true;
-      catchBtn.classList.add('opacity-60');
-      message('Casting the line…', false);
-      draw();
-
+      if (phase === 'dropping' || phase === 'lifting') return;
+      phase = 'dropping'; catchBtn.disabled = true; catchBtn.classList.add('opacity-60');
+      message('Casting the line…', false); draw();
       setTimeout(() => {
         const hit = Math.abs(rod * Math.cos(angle * Math.PI / 180) - fish) <= 0.1;
-        phase = 'landed';
-        caught = hit;
-        sceneMsg = hit ? 'You caught the fish!' : 'The fish is gone!';
-        draw();
-        message(sceneMsg, hit);
-        if (hit) setTryAgain();
-        else swimAway();
+        phase = 'landed'; caught = hit; sceneMsg = hit ? 'You caught the fish!' : 'The fish is gone!';
+        draw(); message(sceneMsg, hit);
+        if (hit) { phase = 'lifting'; liftFish(); } else swimAway();
       }, 720);
     };
 
